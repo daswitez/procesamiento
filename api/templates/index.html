@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الْقَاعِدَة Al Qaeda 🚀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #8A2BE2;
+            --color-primary-hover: #6A1DAD;
+            --color-secondary: #FFD700;
+            --color-background-light: #F0F8FF;
+            --color-background-dark: #FFFFFF;
+            --color-text-dark: #2C3E50;
+            --color-text-light: #5A6A8C;
+            --color-border-soft: #DDEBF0;
+            --color-shadow-soft: rgba(0, 0, 0, 0.1);
+            --color-error: #EF4444;
+            --color-error-bg: #FEE2E2;
+
+            --gradient-header: linear-gradient(90deg, #8A2BE2 0%, #FF69B4 100%); /* Violeta a Rosa */
+            --gradient-upload-button: linear-gradient(45deg, #2ECC71 0%, #28a745 100%); /* Verde */
+            --gradient-upload-button-hover: linear-gradient(45deg, #27AE60 0%, #218838 100%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: var(--color-background-light);
+            color: var(--color-text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            background: var(--gradient-header);
+            padding: 25px 40px;
+            box-shadow: 0 4px 15px var(--color-shadow-soft);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 2.8rem;
+            color: white;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            margin: 0;
+            animation: bounceIn 1s ease-out;
+        }
+
+        .main-container {
+            display: flex;
+            flex-grow: 1;
+            width: 95%;
+            max-width: 1600px;
+            margin: 30px auto;
+            background-color: var(--color-background-dark);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--color-shadow-soft);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sidebar {
+            width: 300px;
+            padding: 25px;
+            background-color: #E6EBF5;
+            border-right: 1px solid var(--color-border-soft);
+            flex-shrink: 0;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .sidebar h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.6rem;
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--color-border-soft);
+            padding-bottom: 12px;
+            text-align: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .filter-group button {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-group button:hover {
+            background-color: var(--color-primary-hover);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            filter: brightness(1.1);
+        }
+        .filter-group button:hover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            transition: left 0.5s ease;
+        }
+        .filter-group button:hover::after {
+            left: 100%;
+        }
+
+        .filter-group button:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-group button i {
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .upload-section {
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--color-background-light);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-section::before {
+            content: '✨';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2.5rem;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .upload-section h2 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            display: block;
+            width: calc(100% - 20px);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px dashed var(--color-border-soft);
+            background-color: var(--color-background-dark);
+            cursor: pointer;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1rem;
+            color: var(--color-text-dark);
+            outline: none;
+            margin: 0 auto 20px auto;
+        }
+
+        input[type="file"]:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
+        }
+
+        .upload-button {
+            padding: 12px 25px;
+            background: var(--gradient-upload-button);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto;
+        }
+
+        .upload-button:hover {
+            background: var(--gradient-upload-button-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+        }
+        .upload-button:active {
+            transform: translateY(0);
+        }
+
+        #image-preview {
+            margin-top: 25px;
+            max-width: 100%;
+            max-height: 450px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px var(--color-shadow-soft);
+            animation: popIn 0.8s ease-out;
+            object-fit: contain;
+            display: none;
+        }
+
+        .error-message {
+            color: var(--color-error);
+            margin: 25px 0;
+            padding: 20px;
+            background: var(--color-error-bg);
+            border-radius: 12px;
+            border: 1px solid var(--color-error);
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            font-weight: 600;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .result-container {
+            margin-top: 40px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .image-display-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        .image-box {
+            background-color: var(--color-background-dark);
+            border: 1px solid var(--color-border-soft);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            animation: scaleIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .image-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            transition: transform 0.5s ease;
+            opacity: 0;
+            transform: scale(0);
+        }
+        .image-box:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .image-box h3 {
+            font-family: 'Fredoka One', cursive;
+            margin-top: 0;
+            margin-bottom: 18px;
+            color: var(--color-primary);
+            font-size: 1.25rem;
+            border-bottom: 2px solid var(--color-border-soft);
+            padding-bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            border-radius: 12px;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .image-box img:hover {
+            transform: scale(1.03);
+        }
+
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+            20% { transform: scale3d(1.1, 1.1, 1.1); }
+            40% { transform: scale3d(0.9, 0.9, 0.9); }
+            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+            80% { transform: scale3d(0.97, 0.97, 0.97); }
+            100% { opacity: 1; transform: scale3d(1, 1, 1); }
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+            80% { opacity: 1; transform: scale(1.05) translateY(-5px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes scaleIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+
+        .decorative-image {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 600px;
+            height: auto;
+            border: 5px solid var(--color-secondary);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0.7;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 5;
+        }
+
+        .decorative-image:hover {
+            transform: scale(1.05) rotate(5deg);
+            opacity: 1;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .main-container {
+                width: 98%;
+                margin: 20px auto;
+            }
+            .sidebar {
+                width: 280px;
+                padding: 20px;
+            }
+            .filter-group button {
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+            .content-area {
+                padding: 30px;
+            }
+            .image-display-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            .image-box img {
+                max-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .main-container {
+                flex-direction: column;
+                margin: 15px;
+                border-radius: 15px;
+            }
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--color-border-soft);
+                padding-bottom: 20px;
+                border-radius: 15px 15px 0 0;
+            }
+            .sidebar h2 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+            .filter-group {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .filter-group button {
+                width: auto;
+                flex-grow: 1;
+                max-width: 160px;
+                font-size: 0.85rem;
+                padding: 8px 12px;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+             .filter-group button i {
+                display: none;
+            }
+            .content-area {
+                padding: 20px;
+                gap: 20px;
+            }
+            .upload-section {
+                padding: 25px;
+                border-radius: 12px;
+            }
+            .upload-section h2 {
+                font-size: 1.5rem;
+            }
+            input[type="file"] {
+                padding: 12px;
+                font-size: 0.9rem;
+            }
+            .upload-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            #image-preview {
+                max-height: 350px;
+            }
+            .image-display-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .image-box {
+                padding: 15px;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            }
+            .image-box h3 {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+            .image-box img {
+                max-height: 280px;
+            }
+            .decorative-image {
+                bottom: 10px;
+                right: 10px;
+                width: 70px;
+                border-width: 3px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px 20px;
+            }
+            h1 {
+                font-size: 1.9rem;
+            }
+            .main-container {
+                margin: 10px;
+            }
+            .sidebar h2 {
+                font-size: 1.2rem;
+            }
+            .filter-group button {
+                padding: 8px 10px;
+                font-size: 0.8rem;
+            }
+            .upload-section {
+                padding: 20px;
+            }
+            .upload-section h2 {
+                font-size: 1.3rem;
+            }
+            .upload-button {
+                font-size: 0.9rem;
+            }
+            .decorative-image {
+                width: 50px;
+                bottom: 5px;
+                right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🎨 Al Qaedad <span style="font-size: 0.8em;">by osama bin laden</span> 🚀</h1>
+</header>
+
+<div class="main-container">
+    <aside class="sidebar">
+        <h2><i class="fas fa-magic"></i> Filtros Mágicos</h2>
+        <form method="post" id="filterForm">
+            {% csrf_token %}
+            <input type="hidden" name="uploaded_image_filename" id="uploaded_image_filename" value="{{ request.session.uploaded_image_filename|default_if_none:'' }}">
+
+            <div class="filter-group">
+                <button type="submit" name="filtro" value="grises"><i class="fas fa-palette"></i> Escala de Grises</button>
+                <button type="submit" name="filtro" value="negativo"><i class="fas fa-inverse"></i> Negativo</button>
+                <button type="submit" name="filtro" value="canales_rgb"><i class="fas fa-tint"></i> Canales RGB (Rojo)</button>
+                <button type="submit" name="filtro" value="blanco_negro"><i class="fas fa-adjust"></i> Blanco y Negro</button>
+                <button type="submit" name="filtro" value="umbral"><i class="fas fa-grip-lines"></i> Umbral</button>
+                <button type="submit" name="filtro" value="solarizado"><i class="fas fa-sun"></i> Solarizado</button>
+                <button type="submit" name="filtro" value="posterizado"><i class="fas fa-shapes"></i> Posterizado</button>
+                <button type="submit" name="filtro" value="falso_color"><i class="fas fa-rainbow"></i> Falso Color</button>
+                <button type="submit" name="filtro" value="eliminar_color_rojo"><i class="fas fa-eraser"></i> Eliminar Rojo</button>
+                <button type="submit" name="filtro" value="aumentar_contraste"><i class="fas fa-circle-notch"></i> Aumentar Contraste</button>
+                <button type="submit" name="filtro" value="aumentar_brillo"><i class="fas fa-lightbulb"></i> Aumentar Brillo</button>
+                <button type="submit" name="filtro" value="histograma"><i class="fas fa-chart-bar"></i> Histograma</button>
+                <button type="submit" name="filtro" value="ecualizar_histograma"><i class="fas fa-compress-alt"></i> Ecualizar Histograma</button>
+                <button type="submit" name="filtro" value="filtro_gaussiano"><i class="fas fa-cloud"></i> Filtro Gaussiano</button>
+                <button type="submit" name="filtro" value="filtro_promedio"><i class="fas fa-blender"></i> Filtro Promedio</button>
+                <button type="submit" name="filtro" value="filtro_pasa_alto"><i class="fas fa-arrow-alt-circle-up"></i> Filtro Pasa Alto</button>
+                <button type="submit" name="filtro" value="deteccion_bordes_sobel"><i class="fas fa-border-all"></i> Bordes (Sobel)</button>
+                <button type="submit" name="filtro" value="deteccion_bordes_canny"><i class="fas fa-cut"></i> Bordes (Canny)</button>
+                <button type="submit" name="filtro" value="contornos"><i class="fas fa-vector-square"></i> Contornos</button>
+                <button type="submit" name="filtro" value="morfologia_dilatacion"><i class="fas fa-expand-alt"></i> Morfología (Dilatación)</button>
+                <button type="submit" name="filtro" value="cambiar_tamano"><i class="fas fa-arrows-alt-h"></i> Cambiar Tamaño (50%)</button>
+                <button type="submit" name="filtro" value="area_perimetro_centroide"><i class="fas fa-ruler-combined"></i> Área / Perímetro / Centroide</button>
+                <button type="submit" name="filtro" value="detectar_rostro_ojos"><i class="fas fa-eye"></i> Detectar Rostro y Ojos</button>
+            </div>
+        </form>
+    </aside>
+
+    <main class="content-area">
+        <div class="upload-section">
+            <h2><i class="fas fa-upload"></i> Sube tu Imagen</h2>
+            <form method="post" enctype="multipart/form-data" id="uploadForm">
+                {% csrf_token %}
+                <input type="file" name="image" id="upload" accept="image/*" required>
+                <button type="submit" class="upload-button"><i class="fas fa-paper-plane"></i> Empezar Edición</button>
+            </form>
+            <img id="image-preview" src="#" alt="Vista previa de imagen" style="display:none;">
+        </div>
+
+        {% if error %}
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i> {{ error }}
+            </div>
+        {% endif %}
+
+        {% if original_image_url %}
+            <div class="result-container">
+                <div class="image-display-grid">
+                    <div class="image-box">
+                        <h3><i class="fas fa-image"></i> Imagen Original</h3>
+                        <img src="{{ original_image_url }}" alt="Imagen original">
+                    </div>
+                    {% if processed_image_url %}
+                        <div class="image-box">
+                            <h3><i class="fas fa-magic"></i> Resultado del Filtro</h3>
+                            <img src="{{ processed_image_url }}" alt="Imagen procesada">
+                        </div>
+                    {% endif %}
+                    {% if histogram_image_url %}
+                        <div class="image-box">
+                            <h3><i class="fas fa-chart-line"></i> Histograma</h3>
+                            <img src="{{ histogram_image_url }}" alt="Histograma de la imagen">
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+    </main>
+
+    <img src="https://camp.ucss.edu.pe/wp-content/uploads/2015/11/bandera-isis.jpg" alt="Elemento decorativo" class="decorative-image">
+
+</div>
+
+<script>
+    const uploadInput = document.getElementById("upload");
+    const imagePreview = document.getElementById("image-preview");
+    const uploadedImageFilenameInput = document.getElementById("uploaded_image_filename");
+
+    uploadInput.addEventListener("change", function() {
+        const file = uploadInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = "block";
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.style.display = "none";
+        }
+    });
+
+    uploadInput.addEventListener("change", function() {
+        const resultContainer = document.querySelector('.result-container');
+        if (resultContainer) {
+            resultContainer.innerHTML = '';
+        }
+    });
+
+</script>
+
+</body>
+</html>
