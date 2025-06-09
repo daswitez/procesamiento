@@ -18,7 +18,7 @@ def apply_negative(image):
 
 def apply_rgb_channels(image):
     b, g, r = cv2.split(image)
-    return r # Example: returning only the red channel
+    return r
 
 def apply_black_and_white(image, threshold_val=127):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -31,7 +31,6 @@ def apply_threshold(image, threshold_val=127, max_val=255, threshold_type=cv2.TH
     return thresholded_image
 
 def apply_solarize(image):
-    # A more common solarization implementation is (255 - pixel_value) for values above threshold
     solarized_image = np.where(image < 128, image, 255 - image).astype(np.uint8)
     return solarized_image
 
