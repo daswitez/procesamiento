@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الْقَاعِدَة Al Qaeda 🚀</title>
+    <title>AL QAEDA (by osama bin laden)</title>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -100,6 +100,87 @@
             flex-direction: column;
             gap: 12px;
         }
+
+        .filter-slider-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: var(--color-primary);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .filter-slider-group:hover {
+            background-color: var(--color-primary-hover);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            filter: brightness(1.1);
+        }
+
+        .filter-slider-group label {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-slider-group input[type="range"] {
+            width: 90%;
+            -webkit-appearance: none;
+            height: 8px;
+            background: var(--color-secondary); /
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+            opacity: 0.9;
+            transition: opacity .2s;
+        }
+
+        .filter-slider-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: background 0.3s ease;
+        }
+
+        .filter-slider-group input[type="range"]::-webkit-slider-thumb:active {
+            cursor: grabbing;
+        }
+
+        .filter-slider-group input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: grab;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: background 0.3s ease;
+        }
+
+        .filter-slider-group input[type="range"]::-moz-range-thumb:active {
+            cursor: grabbing;
+        }
+
+        .filter-slider-group .slider-value {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+        }
+
 
         .filter-group button {
             display: flex;
@@ -389,7 +470,6 @@
         }
 
 
-        /* Responsive adjustments */
         @media (max-width: 1024px) {
             .main-container {
                 width: 98%;
@@ -399,7 +479,7 @@
                 width: 280px;
                 padding: 20px;
             }
-            .filter-group button {
+            .filter-group button, .filter-slider-group {
                 font-size: 0.9rem;
                 padding: 10px 15px;
             }
@@ -435,13 +515,13 @@
                 font-size: 1.4rem;
                 margin-bottom: 15px;
             }
-            .filter-group {
+            .filter-group, .filter-slider-group {
                 flex-direction: row;
                 flex-wrap: wrap;
                 justify-content: center;
                 gap: 10px;
             }
-            .filter-group button {
+            .filter-group button, .filter-slider-group {
                 width: auto;
                 flex-grow: 1;
                 max-width: 160px;
@@ -450,9 +530,20 @@
                 border-radius: 8px;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             }
-             .filter-group button i {
+            .filter-group button i {
                 display: none;
             }
+            .filter-slider-group label {
+                font-size: 0.85rem;
+                margin-bottom: 0;
+            }
+            .filter-slider-group input[type="range"] {
+                width: 100%;
+            }
+            .filter-slider-group .slider-value {
+                display: none;
+            }
+
             .content-area {
                 padding: 20px;
                 gap: 20px;
@@ -512,7 +603,7 @@
             .sidebar h2 {
                 font-size: 1.2rem;
             }
-            .filter-group button {
+            .filter-group button, .filter-slider-group {
                 padding: 8px 10px;
                 font-size: 0.8rem;
             }
@@ -542,22 +633,44 @@
 <div class="main-container">
     <aside class="sidebar">
         <h2><i class="fas fa-magic"></i> Filtros Mágicos</h2>
-        <form method="post" id="filterForm">
+        <form method="post" id="filterForm" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="hidden" name="uploaded_image_filename" id="uploaded_image_filename" value="{{ request.session.uploaded_image_filename|default_if_none:'' }}">
+            <input type="hidden" name="uploaded_image_filename" id="uploaded_image_filename" value="{{ uploaded_image_filename }}">
+            <input type="hidden" name="current_processed_image_filename" id="current_processed_image_filename" value="{{ current_processed_image_filename }}">
+
 
             <div class="filter-group">
                 <button type="submit" name="filtro" value="grises"><i class="fas fa-palette"></i> Escala de Grises</button>
                 <button type="submit" name="filtro" value="negativo"><i class="fas fa-inverse"></i> Negativo</button>
                 <button type="submit" name="filtro" value="canales_rgb"><i class="fas fa-tint"></i> Canales RGB (Rojo)</button>
-                <button type="submit" name="filtro" value="blanco_negro"><i class="fas fa-adjust"></i> Blanco y Negro</button>
+
+                <div class="filter-slider-group">
+                    <label for="blanco_negro_level"><i class="fas fa-adjust"></i> Blanco y Negro</label>
+                    <input type="range" id="blanco_negro_level" name="blanco_negro_level" min="0" max="100" value="50"> <span class="slider-value" id="blanco_negro_value">50</span>
+                    {# Hidden input to specify the filter when this slider is used #}
+                    <input type="hidden" name="filtro_type_blanco_negro" value="blanco_negro" class="slider-filter-trigger">
+                </div>
+
                 <button type="submit" name="filtro" value="umbral"><i class="fas fa-grip-lines"></i> Umbral</button>
                 <button type="submit" name="filtro" value="solarizado"><i class="fas fa-sun"></i> Solarizado</button>
                 <button type="submit" name="filtro" value="posterizado"><i class="fas fa-shapes"></i> Posterizado</button>
                 <button type="submit" name="filtro" value="falso_color"><i class="fas fa-rainbow"></i> Falso Color</button>
                 <button type="submit" name="filtro" value="eliminar_color_rojo"><i class="fas fa-eraser"></i> Eliminar Rojo</button>
-                <button type="submit" name="filtro" value="aumentar_contraste"><i class="fas fa-circle-notch"></i> Aumentar Contraste</button>
-                <button type="submit" name="filtro" value="aumentar_brillo"><i class="fas fa-lightbulb"></i> Aumentar Brillo</button>
+
+                <div class="filter-slider-group">
+                    <label for="contraste_level"><i class="fas fa-circle-notch"></i> Aumentar Contraste</label>
+                    <input type="range" id="contraste_level" name="contraste_level" min="0" max="100" value="50"> <span class="slider-value" id="contraste_value">50%</span>
+                    {# Hidden input to specify the filter when this slider is used #}
+                    <input type="hidden" name="filtro_type_contrast" value="increase_contrast" class="slider-filter-trigger">
+                </div>
+
+                <div class="filter-slider-group">
+                    <label for="brillo_level"><i class="fas fa-lightbulb"></i> Aumentar Brillo</label>
+                    <input type="range" id="brillo_level" name="brillo_level" min="0" max="100" value="50"> <span class="slider-value" id="brillo_value">50%</span>
+                    {# Hidden input to specify the filter when this slider is used #}
+                    <input type="hidden" name="filtro_type_brightness" value="increase_brightness" class="slider-filter-trigger">
+                </div>
+
                 <button type="submit" name="filtro" value="histograma"><i class="fas fa-chart-bar"></i> Histograma</button>
                 <button type="submit" name="filtro" value="ecualizar_histograma"><i class="fas fa-compress-alt"></i> Ecualizar Histograma</button>
                 <button type="submit" name="filtro" value="filtro_gaussiano"><i class="fas fa-cloud"></i> Filtro Gaussiano</button>
@@ -571,6 +684,10 @@
                 <button type="submit" name="filtro" value="area_perimetro_centroide"><i class="fas fa-ruler-combined"></i> Área / Perímetro / Centroide</button>
                 <button type="submit" name="filtro" value="detectar_rostro_ojos"><i class="fas fa-eye"></i> Detectar Rostro y Ojos</button>
             </div>
+        </form>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="reset_image" value="reset"><i class="fas fa-undo"></i> Reiniciar Imagen</button>
         </form>
     </aside>
 
@@ -623,29 +740,86 @@
     const uploadInput = document.getElementById("upload");
     const imagePreview = document.getElementById("image-preview");
     const uploadedImageFilenameInput = document.getElementById("uploaded_image_filename");
+    const currentProcessedImageFilenameInput = document.getElementById("current_processed_image_filename");
 
-    uploadInput.addEventListener("change", function() {
-        const file = uploadInput.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = "block";
-            };
-            reader.readAsDataURL(file);
-        } else {
-            imagePreview.style.display = "none";
+    const filterForm = document.getElementById('filterForm');
+    const uploadForm = document.getElementById('uploadForm');
+
+    function updateSliderValueDisplay(slider, valueSpan) {
+        if (slider && valueSpan) {
+            valueSpan.textContent = slider.value + (slider.id !== 'blanco_negro_level' ? '%' : '');
         }
-    });
+    }
 
-    uploadInput.addEventListener("change", function() {
-        const resultContainer = document.querySelector('.result-container');
-        if (resultContainer) {
-            resultContainer.innerHTML = '';
-        }
-    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const sliderConfigs = [
+            { id: 'blanco_negro_level', spanId: 'blanco_negro_value' },
+            { id: 'contraste_level', spanId: 'contraste_value' },
+            { id: 'brillo_level', spanId: 'brillo_value' }
+        ];
 
+        sliderConfigs.forEach(config => {
+            const slider = document.getElementById(config.id);
+            const valueSpan = document.getElementById(config.spanId);
+
+            if (slider && valueSpan) {
+                updateSliderValueDisplay(slider, valueSpan);
+
+                slider.addEventListener('input', () => updateSliderValueDisplay(slider, valueSpan));
+                slider.addEventListener('change', () => {
+                    const hiddenFilterInput = slider.closest('.filter-slider-group').querySelector('.slider-filter-trigger');
+
+                    document.querySelectorAll('.slider-filter-trigger').forEach(input => {
+                        input.removeAttribute('name');
+                    });
+
+                    if (hiddenFilterInput) {
+                        hiddenFilterInput.setAttribute('name', 'filtro');
+                    }
+
+                    filterForm.submit();
+                });
+            }
+        });
+
+        uploadInput.addEventListener("change", function() {
+            const file = uploadInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+
+                const resultContainer = document.querySelector('.result-container');
+                if (resultContainer) {
+                    resultContainer.style.display = 'none';
+                }
+                const errorMessageDiv = document.querySelector('.error-message');
+                if (errorMessageDiv) errorMessageDiv.remove();
+
+                uploadedImageFilenameInput.value = '';
+                currentProcessedImageFilenameInput.value = '';
+            } else {
+                imagePreview.style.display = "none";
+                const resultContainer = document.querySelector('.result-container');
+                if (resultContainer) {
+                    resultContainer.style.display = 'none';
+                }
+                uploadedImageFilenameInput.value = '';
+                currentProcessedImageFilenameInput.value = '';
+            }
+        });
+
+        filterForm.querySelectorAll('button[name="filtro"]').forEach(button => {
+            button.addEventListener('click', function(event) {
+                const sliderTriggers = filterForm.querySelectorAll('.slider-filter-trigger');
+                sliderTriggers.forEach(trigger => {
+                    trigger.removeAttribute('name');
+                });
+            });
+        });
+    });
 </script>
-
 </body>
-</html>
